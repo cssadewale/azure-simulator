@@ -1,0 +1,199 @@
+/* =====================================================
+   SERVICES CSS
+   ===================================================== */
+
+/* VM Card */
+.vm-card {
+  background: white;
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.vm-card:hover { box-shadow: var(--shadow-md); }
+.vm-card-header {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #f3f2f1;
+}
+.vm-card-body { padding: 12px 14px; }
+.vm-stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; }
+.vm-stat-label { color: var(--text-muted); }
+.vm-stat-val { font-weight: 600; }
+.vm-actions {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  border-top: 1px solid #f3f2f1;
+  background: #faf9f8;
+}
+
+/* Pipeline */
+.pipeline-stage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  background: white;
+  margin-bottom: 8px;
+}
+.stage-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+}
+.stage-success { background: #dff6dd; color: #107c10; }
+.stage-pending { background: #fff4ce; color: #8a6700; }
+.stage-running { background: #deecf9; color: #0078D4; }
+.stage-failed { background: #fde7e9; color: #a4262c; }
+.stage-info { flex: 1; }
+.stage-name { font-size: 13px; font-weight: 600; }
+.stage-dur { font-size: 11px; color: var(--text-muted); }
+.pipeline-connector {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1;
+  margin: -4px 0;
+}
+
+/* Network Topology */
+.topology-container {
+  width: 100%;
+  height: 300px;
+  background: #f9f9f8;
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topology-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  z-index: 2;
+}
+.topology-node-icon {
+  width: 48px; height: 48px;
+  background: white;
+  border: 2px solid var(--azure-blue);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.topology-node:hover .topology-node-icon { box-shadow: var(--shadow-md); transform: scale(1.05); }
+.topology-node-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+.topology-line {
+  position: absolute;
+  height: 2px;
+  background: #c8c6c4;
+  z-index: 1;
+  transform-origin: left center;
+}
+
+/* Key Vault Secret Row */
+.secret-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #f3f2f1;
+}
+.secret-row:last-child { border-bottom: none; }
+.secret-name { flex: 1; font-size: 13px; font-weight: 500; }
+.secret-value {
+  font-family: monospace;
+  font-size: 12px;
+  background: #f3f2f1;
+  padding: 3px 8px;
+  border-radius: 2px;
+  color: var(--text-muted);
+}
+.secret-value.revealed { color: var(--text-primary); background: #fff4ce; }
+
+/* Cost Chart */
+.cost-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.cost-bar-label { width: 140px; font-size: 12px; color: var(--text-secondary); flex-shrink: 0; truncate: true; }
+.cost-bar-track { flex: 1; height: 18px; background: #f3f2f1; border-radius: 3px; overflow: hidden; }
+.cost-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+.cost-bar-val { width: 60px; font-size: 12px; font-weight: 600; text-align: right; flex-shrink: 0; }
+
+/* ML Studio */
+.experiment-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-bottom: 1px solid #f3f2f1;
+}
+.experiment-row:last-child { border-bottom: none; }
+.experiment-name { flex: 1; font-size: 13px; font-weight: 500; }
+.experiment-metric { font-size: 12px; color: var(--text-muted); }
+.experiment-metric strong { color: var(--success); }
+
+/* Log Analytics Query */
+.log-query-box {
+  background: #1e1e1e;
+  border-radius: var(--border-radius);
+  padding: 14px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 12px;
+  color: #d4d4d4;
+  margin-bottom: 12px;
+  position: relative;
+}
+.log-query-box .kw { color: #569cd6; }
+.log-query-box .str { color: #ce9178; }
+.log-query-box .num { color: #b5cea8; }
+.log-query-box .comment { color: #6a9955; }
+.log-run-btn {
+  position: absolute;
+  top: 10px; right: 10px;
+}
+
+.log-result-table {
+  background: white;
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+/* Blob file browser */
+.blob-breadcrumb {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 13px; margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #f3f2f1;
+  border-radius: var(--border-radius);
+}
+.blob-breadcrumb span { cursor: pointer; color: var(--azure-blue); }
+.blob-breadcrumb span:hover { text-decoration: underline; }
+.blob-breadcrumb .sep { color: var(--text-muted); }
+
+.blob-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #f3f2f1;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.blob-item:hover { background: #f9f9f8; }
+.blob-item:last-child { border-bottom: none; }
+.blob-item-icon { font-size: 18px; }
+.blob-item-name { flex: 1; font-size: 13px; }
+.blob-item-meta { font-size: 11px; color: var(--text-muted); text-align: right; }

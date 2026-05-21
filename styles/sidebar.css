@@ -1,0 +1,289 @@
+/* =====================================================
+   SIDEBAR STYLES
+   ===================================================== */
+
+.sidebar {
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 900;
+  transition: width var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed);
+}
+
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 8px 0;
+}
+
+.nav-section {
+  margin-bottom: 4px;
+}
+
+.nav-section-title {
+  padding: 10px 14px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #6e6e6e;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity var(--transition);
+}
+
+.sidebar.collapsed .nav-section-title {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  color: #c8c8c8;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+  border-radius: 2px;
+  margin: 1px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 13px;
+  position: relative;
+}
+
+.nav-item svg {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.nav-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+  transition: opacity var(--transition);
+}
+
+.sidebar.collapsed .nav-item span {
+  opacity: 0;
+  width: 0;
+}
+
+.nav-item:hover {
+  background: var(--sidebar-hover);
+  color: white;
+}
+
+.nav-item:hover svg { opacity: 1; }
+
+.nav-item.active {
+  background: var(--azure-blue);
+  color: white;
+}
+
+.nav-item.active svg { opacity: 1; }
+
+/* Tooltip for collapsed mode */
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 10px;
+}
+
+.sidebar.collapsed .nav-item::after {
+  content: attr(data-page);
+  position: absolute;
+  left: 56px;
+  background: #323130;
+  color: white;
+  padding: 6px 10px;
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 999;
+  box-shadow: var(--shadow-md);
+}
+
+.sidebar.collapsed .nav-item:hover::after {
+  opacity: 1;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 12px 8px;
+  border-top: 1px solid #2d2d2e;
+}
+
+.sidebar-footer-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--border-radius);
+  color: #c8c8c8;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--font);
+  transition: var(--transition);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.sidebar-footer-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+.sidebar.collapsed .sidebar-footer-btn span { display: none; }
+.sidebar.collapsed .sidebar-footer-btn { justify-content: center; }
+
+/* Scrollbar for sidebar */
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
+
+/* Notification Panel */
+.notification-panel {
+  position: fixed;
+  top: var(--topbar-height);
+  right: -360px;
+  width: 360px;
+  background: white;
+  box-shadow: var(--shadow-lg);
+  border-left: 1px solid var(--card-border);
+  height: calc(100vh - var(--topbar-height));
+  z-index: 800;
+  transition: right 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.notification-panel.open { right: 0; }
+.notif-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 15px;
+}
+.notif-header button {
+  background: none; border: none; cursor: pointer; font-size: 16px; color: var(--text-muted);
+}
+.notif-list { overflow-y: auto; flex: 1; padding: 8px; }
+.notif-item {
+  padding: 12px;
+  border-radius: var(--border-radius);
+  margin-bottom: 6px;
+  border-left: 3px solid var(--azure-blue);
+  background: #f9f9f8;
+  font-size: 13px;
+}
+.notif-item.warning { border-left-color: #d83b01; }
+.notif-item.success { border-left-color: var(--success); }
+.notif-item-title { font-weight: 600; margin-bottom: 2px; }
+.notif-item-time { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* Learning Panel */
+.learning-panel {
+  position: fixed;
+  top: var(--topbar-height);
+  right: -420px;
+  width: 420px;
+  background: white;
+  box-shadow: var(--shadow-lg);
+  border-left: 1px solid var(--card-border);
+  height: calc(100vh - var(--topbar-height));
+  z-index: 800;
+  transition: right 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.learning-panel.open { right: 0; }
+.learning-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 15px;
+  background: #deecf9;
+}
+.learning-header button {
+  background: none; border: none; cursor: pointer; font-size: 16px; color: var(--text-secondary);
+}
+.learning-content { overflow-y: auto; flex: 1; padding: 16px; }
+.learning-module {
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.learning-module-header {
+  padding: 12px 14px;
+  background: #f9f9f8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 13px;
+}
+.learning-module-body {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: none;
+}
+.learning-module-body.open { display: block; }
+.learning-step {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+.learning-step-num {
+  width: 22px;
+  height: 22px;
+  background: var(--azure-blue);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.module-progress {
+  height: 4px;
+  background: #f0f0f0;
+}
+.module-progress-fill {
+  height: 100%;
+  background: var(--azure-blue);
+}

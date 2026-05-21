@@ -1,0 +1,552 @@
+/* =====================================================
+   ENHANCEMENTS.CSS
+   Dark Mode, Quiz Mode, ARM Builder, Activity Log,
+   What-If Estimator, New Panels, Animations
+   Author: Adewale Adeagbo | GitHub: cssadewale
+   ===================================================== */
+
+/* ===================================================
+   1. DARK MODE — Full portal dark theme
+   =================================================== */
+
+[data-theme="dark"] {
+  --azure-blue: #4da3ff;
+  --azure-dark: #2b88d8;
+  --topbar-bg: #1b1b1c;
+  --sidebar-bg: #111111;
+  --sidebar-hover: #2a2a2b;
+  --main-bg: #1e1e1f;
+  --card-bg: #252526;
+  --card-border: #3a3a3b;
+  --text-primary: #e8e8e8;
+  --text-secondary: #b0b0b0;
+  --text-muted: #777;
+  --success: #4ec9b0;
+  --danger: #f48771;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.5);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.6);
+}
+
+[data-theme="dark"] body { background: var(--main-bg); color: var(--text-primary); }
+[data-theme="dark"] .topbar { background: #1b1b1c; border-bottom: 1px solid #333; }
+[data-theme="dark"] .topbar-search { background: rgba(255,255,255,0.08); }
+[data-theme="dark"] .topbar-search:focus-within { background: #2d2d2e; }
+[data-theme="dark"] .topbar-search:focus-within input { color: #e8e8e8; }
+[data-theme="dark"] .portal-title { color: #e8e8e8; }
+[data-theme="dark"] .card { background: var(--card-bg); border-color: var(--card-border); }
+[data-theme="dark"] .card-header { background: #2d2d2e; border-color: var(--card-border); }
+[data-theme="dark"] .data-table th { background: #2d2d2e; color: #b0b0b0; border-color: var(--card-border); }
+[data-theme="dark"] .data-table td { border-color: #2d2d2e; color: var(--text-primary); }
+[data-theme="dark"] .data-table tr:hover td { background: #2d2d2e; }
+[data-theme="dark"] .form-control { background: #2d2d2e; border-color: #555; color: #e8e8e8; }
+[data-theme="dark"] .form-control:focus { border-color: var(--azure-blue); }
+[data-theme="dark"] .info-box { background: #1a3a5c; border-color: #2d5a8e; color: #90c8f0; }
+[data-theme="dark"] .info-box.warning { background: #3a2400; border-color: #8a4a00; color: #f0c060; }
+[data-theme="dark"] .info-box.success { background: #0a2a1a; border-color: #1a5a3a; color: #6fd8a0; }
+[data-theme="dark"] .tab-bar { border-color: var(--card-border); }
+[data-theme="dark"] .tab-item { color: var(--text-muted); }
+[data-theme="dark"] .tab-item:hover { background: #2d2d2e; color: #e8e8e8; }
+[data-theme="dark"] .metric-card { background: #252526; border-color: #3a3a3b; }
+[data-theme="dark"] .metric-value { color: #e8e8e8; }
+[data-theme="dark"] .service-card { background: #252526; border-color: #3a3a3b; }
+[data-theme="dark"] .service-card:hover { border-color: var(--azure-blue); }
+[data-theme="dark"] .quick-action-btn { background: #252526; border-color: #3a3a3b; color: #e8e8e8; }
+[data-theme="dark"] .quick-action-btn:hover { background: #2d2d2e; border-color: var(--azure-blue); }
+[data-theme="dark"] .vm-card { background: #252526; border-color: #3a3a3b; }
+[data-theme="dark"] .vm-actions { background: #2d2d2e; border-color: #3a3a3b; }
+[data-theme="dark"] .search-results { background: #252526; border-color: #3a3a3b; }
+[data-theme="dark"] .search-result-item:hover { background: #2d2d2e; }
+[data-theme="dark"] .search-result-name { color: #e8e8e8; }
+[data-theme="dark"] .blob-item:hover { background: #2d2d2e; }
+[data-theme="dark"] .recent-item { border-color: #3a3a3b; }
+[data-theme="dark"] .modal { background: #252526; }
+[data-theme="dark"] .modal-header { background: #2d2d2e; }
+[data-theme="dark"] .modal-footer { background: #252526; border-color: #3a3a3b; }
+[data-theme="dark"] .btn-secondary { background: #2d2d2e; color: var(--azure-blue); border-color: var(--azure-blue); }
+[data-theme="dark"] .btn-secondary:hover { background: #1a3a5c; }
+[data-theme="dark"] .btn-ghost { color: var(--azure-blue); }
+[data-theme="dark"] .btn-ghost:hover { background: #1a3a5c; }
+[data-theme="dark"] .dashboard-welcome { background: linear-gradient(135deg, #005a9e 0%, #003d6b 50%, #002147 100%); }
+[data-theme="dark"] .progress-bar { background: #3a3a3b; }
+[data-theme="dark"] .topology-container { background: #1e1e1f; border-color: #3a3a3b; }
+[data-theme="dark"] .topology-node-icon { background: #252526; border-color: var(--azure-blue); }
+[data-theme="dark"] .notification-panel,
+[data-theme="dark"] .learning-panel,
+[data-theme="dark"] .activity-panel,
+[data-theme="dark"] .whatif-panel { background: #252526; border-color: #3a3a3b; }
+[data-theme="dark"] .notif-header { border-color: #3a3a3b; }
+[data-theme="dark"] .notif-item { background: #2d2d2e; }
+[data-theme="dark"] .learning-module { border-color: #3a3a3b; }
+[data-theme="dark"] .learning-module-header { background: #2d2d2e; }
+[data-theme="dark"] .sidebar-footer { border-color: #2d2d2e; }
+[data-theme="dark"] .sidebar-footer-btn { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.08); }
+[data-theme="dark"] code { background: #2d2d2e; color: #4ec9b0; border-radius: 3px; padding: 1px 5px; }
+
+/* Dark mode body bg */
+[data-theme="dark"] .main-content { background: var(--main-bg); }
+
+/* ===================================================
+   2. QUIZ MODE — Full-screen exam simulator
+   =================================================== */
+
+.quiz-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 3000;
+  backdrop-filter: blur(4px);
+}
+
+.quiz-container {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3001;
+  width: min(680px, 95vw);
+  max-height: 90vh;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .quiz-container { background: #252526; color: #e8e8e8; }
+
+.quiz-topbar {
+  background: var(--azure-blue);
+  color: white;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.quiz-topbar h2 { font-size: 16px; font-weight: 700; }
+.quiz-timer {
+  background: rgba(255,255,255,0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.quiz-timer.urgent { background: rgba(220,50,50,0.8); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+.quiz-progress-bar {
+  height: 4px;
+  background: #e0e0e0;
+  flex-shrink: 0;
+}
+.quiz-progress-fill {
+  height: 100%;
+  background: var(--azure-blue);
+  transition: width 0.4s ease;
+}
+
+.quiz-body { padding: 24px; overflow-y: auto; flex: 1; }
+.quiz-question-num { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.quiz-question-text { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 20px; color: var(--text-primary); }
+.quiz-scenario {
+  background: #deecf9; border-left: 4px solid var(--azure-blue);
+  border-radius: 4px; padding: 12px 14px;
+  font-size: 13px; color: #004578; margin-bottom: 16px; line-height: 1.6;
+}
+[data-theme="dark"] .quiz-scenario { background: #1a3a5c; color: #90c8f0; }
+
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-option {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 16px;
+  border: 2px solid var(--card-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px; line-height: 1.5;
+  background: white;
+}
+[data-theme="dark"] .quiz-option { background: #2d2d2e; border-color: #555; color: #e8e8e8; }
+.quiz-option:hover { border-color: var(--azure-blue); background: #f0f7ff; }
+[data-theme="dark"] .quiz-option:hover { background: #1a3a5c; }
+.quiz-option.selected { border-color: var(--azure-blue); background: #deecf9; }
+[data-theme="dark"] .quiz-option.selected { background: #1a3a5c; }
+.quiz-option.correct { border-color: #107c10; background: #dff6dd; }
+[data-theme="dark"] .quiz-option.correct { background: #0a2a1a; border-color: #4ec9b0; }
+.quiz-option.wrong { border-color: #a4262c; background: #fde7e9; }
+[data-theme="dark"] .quiz-option.wrong { background: #2a0a0a; border-color: #f48771; }
+.quiz-option-letter {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--card-border); color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+}
+.quiz-option.selected .quiz-option-letter { background: var(--azure-blue); color: white; }
+.quiz-option.correct .quiz-option-letter { background: #107c10; color: white; }
+.quiz-option.wrong .quiz-option-letter { background: #a4262c; color: white; }
+
+.quiz-explanation {
+  margin-top: 16px; padding: 14px;
+  background: #fff4ce; border-left: 4px solid #f7c41f;
+  border-radius: 4px; font-size: 13px; line-height: 1.6;
+  display: none;
+}
+[data-theme="dark"] .quiz-explanation { background: #2a2000; border-color: #8a6700; color: #f0c060; }
+.quiz-explanation.visible { display: block; }
+.quiz-explanation strong { color: #3e2400; display: block; margin-bottom: 4px; }
+[data-theme="dark"] .quiz-explanation strong { color: #f0c060; }
+
+.quiz-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--card-border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+  background: #f9f9f8;
+}
+[data-theme="dark"] .quiz-footer { background: #2d2d2e; border-color: #3a3a3b; }
+.quiz-score-display { font-size: 13px; color: var(--text-muted); }
+.quiz-score-display strong { color: var(--text-primary); }
+
+/* Results screen */
+.quiz-results { padding: 30px; text-align: center; }
+.quiz-results-icon { font-size: 64px; margin-bottom: 16px; }
+.quiz-results-score { font-size: 48px; font-weight: 800; margin-bottom: 8px; }
+.quiz-results-label { font-size: 16px; color: var(--text-secondary); margin-bottom: 24px; }
+.quiz-results-breakdown { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.quiz-results-stat { background: #f3f2f1; border-radius: 8px; padding: 14px; }
+[data-theme="dark"] .quiz-results-stat { background: #2d2d2e; }
+.quiz-results-stat-val { font-size: 24px; font-weight: 700; }
+.quiz-results-stat-label { font-size: 11px; color: var(--text-muted); }
+
+/* ===================================================
+   3. ARM TEMPLATE BUILDER PANEL
+   =================================================== */
+
+.arm-panel {
+  position: fixed;
+  top: var(--topbar-height); right: -520px;
+  width: 520px;
+  background: white;
+  box-shadow: var(--shadow-lg);
+  border-left: 1px solid var(--card-border);
+  height: calc(100vh - var(--topbar-height));
+  z-index: 800;
+  transition: right 0.3s ease;
+  display: flex; flex-direction: column;
+}
+[data-theme="dark"] .arm-panel { background: #252526; border-color: #3a3a3b; }
+.arm-panel.open { right: 0; }
+
+.arm-panel-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--card-border);
+  display: flex; align-items: center; justify-content: space-between;
+  background: #deecf9; flex-shrink: 0;
+  font-size: 14px;
+}
+[data-theme="dark"] .arm-panel-header { background: #1a3a5c; color: #90c8f0; }
+.arm-panel-header button { background: none; border: none; cursor: pointer; font-size: 18px; color: var(--text-muted); }
+
+.arm-panel-body { overflow-y: auto; flex: 1; padding: 16px; }
+
+.arm-resource-picker {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px;
+}
+.arm-resource-btn {
+  padding: 10px 12px; background: white; border: 1px solid var(--card-border);
+  border-radius: 4px; cursor: pointer; font-size: 12px; font-family: var(--font);
+  display: flex; align-items: center; gap: 8px; transition: var(--transition);
+  font-weight: 500;
+}
+[data-theme="dark"] .arm-resource-btn { background: #2d2d2e; border-color: #555; color: #e8e8e8; }
+.arm-resource-btn:hover { border-color: var(--azure-blue); color: var(--azure-blue); background: #f0f7ff; }
+[data-theme="dark"] .arm-resource-btn:hover { background: #1a3a5c; }
+
+.arm-output {
+  background: #1e1e1e; border-radius: 4px;
+  font-family: 'Consolas', monospace; font-size: 12px;
+  color: #d4d4d4; padding: 14px; overflow-x: auto;
+  max-height: 400px; overflow-y: auto; line-height: 1.6;
+}
+.arm-output .json-key { color: #9cdcfe; }
+.arm-output .json-string { color: #ce9178; }
+.arm-output .json-number { color: #b5cea8; }
+.arm-output .json-bool { color: #569cd6; }
+
+.arm-toolbar { display: flex; gap: 8px; margin-top: 10px; }
+
+/* ===================================================
+   4. ACTIVITY LOG PANEL
+   =================================================== */
+
+.activity-panel {
+  position: fixed;
+  top: var(--topbar-height); right: -400px;
+  width: 400px;
+  background: white;
+  box-shadow: var(--shadow-lg);
+  border-left: 1px solid var(--card-border);
+  height: calc(100vh - var(--topbar-height));
+  z-index: 800;
+  transition: right 0.3s ease;
+  display: flex; flex-direction: column;
+}
+[data-theme="dark"] .activity-panel { background: #252526; border-color: #3a3a3b; }
+.activity-panel.open { right: 0; }
+
+.activity-item {
+  display: flex; gap: 12px; padding: 10px 12px;
+  border-bottom: 1px solid #f3f2f1;
+  font-size: 12px;
+}
+[data-theme="dark"] .activity-item { border-color: #3a3a3b; }
+.activity-item-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0; margin-top: 2px;
+}
+.activity-item-icon.create { background: #dff6dd; color: #107c10; }
+.activity-item-icon.delete { background: #fde7e9; color: #a4262c; }
+.activity-item-icon.update { background: #deecf9; color: #0078D4; }
+.activity-item-icon.action { background: #fff4ce; color: #8a6700; }
+.activity-item-body { flex: 1; }
+.activity-item-title { font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.activity-item-meta { color: var(--text-muted); }
+.activity-item-time { font-size: 11px; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; }
+
+.activity-filter-bar {
+  padding: 10px 12px; border-bottom: 1px solid var(--card-border);
+  display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap;
+}
+.activity-filter-btn {
+  padding: 3px 10px; border-radius: 12px; border: 1px solid var(--card-border);
+  background: white; cursor: pointer; font-size: 11px; font-family: var(--font);
+  transition: var(--transition); font-weight: 600;
+}
+[data-theme="dark"] .activity-filter-btn { background: #2d2d2e; border-color: #555; color: #e8e8e8; }
+.activity-filter-btn.active { background: var(--azure-blue); color: white; border-color: var(--azure-blue); }
+.activity-filter-btn:hover:not(.active) { border-color: var(--azure-blue); color: var(--azure-blue); }
+
+/* ===================================================
+   5. WHAT-IF COST ESTIMATOR PANEL
+   =================================================== */
+
+.whatif-panel {
+  position: fixed;
+  top: var(--topbar-height); right: -440px;
+  width: 440px;
+  background: white;
+  box-shadow: var(--shadow-lg);
+  border-left: 1px solid var(--card-border);
+  height: calc(100vh - var(--topbar-height));
+  z-index: 800;
+  transition: right 0.3s ease;
+  display: flex; flex-direction: column;
+}
+[data-theme="dark"] .whatif-panel { background: #252526; border-color: #3a3a3b; }
+.whatif-panel.open { right: 0; }
+
+.cost-estimate-card {
+  background: #f3f2f1; border-radius: 6px; padding: 14px;
+  margin-bottom: 10px; border: 1px solid var(--card-border);
+}
+[data-theme="dark"] .cost-estimate-card { background: #2d2d2e; border-color: #555; }
+.cost-estimate-label { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+.cost-estimate-value { font-size: 22px; font-weight: 700; color: var(--azure-blue); margin: 4px 0; }
+.cost-estimate-detail { font-size: 12px; color: var(--text-muted); }
+
+/* ===================================================
+   6. NEW SERVICE PAGES — Service Bus, API Mgmt, etc.
+   =================================================== */
+
+.feature-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px; margin-bottom: 20px;
+}
+.feature-card {
+  background: white; border: 1px solid var(--card-border);
+  border-radius: 6px; padding: 16px;
+  transition: var(--transition);
+}
+[data-theme="dark"] .feature-card { background: #252526; border-color: #3a3a3b; }
+.feature-card:hover { border-color: var(--azure-blue); box-shadow: var(--shadow-md); }
+.feature-card-icon { font-size: 28px; margin-bottom: 8px; }
+.feature-card-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.feature-card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+/* Advisor recommendation card */
+.advisor-card {
+  background: white; border: 1px solid var(--card-border);
+  border-radius: 6px; padding: 16px; margin-bottom: 10px;
+  border-left: 4px solid var(--azure-blue);
+  transition: var(--transition);
+}
+[data-theme="dark"] .advisor-card { background: #252526; border-color: #3a3a3b; }
+.advisor-card:hover { box-shadow: var(--shadow-md); }
+.advisor-card.high { border-left-color: #a4262c; }
+.advisor-card.medium { border-left-color: #d83b01; }
+.advisor-card.low { border-left-color: #107c10; }
+.advisor-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.advisor-card-title { font-size: 13px; font-weight: 700; flex: 1; }
+.advisor-card-body { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+.advisor-impact { font-size: 11px; color: var(--text-muted); margin-top: 8px; display: flex; gap: 12px; }
+
+/* Architecture diagram builder */
+.arch-canvas {
+  background: #f9f9f8; border: 2px dashed var(--card-border);
+  border-radius: 6px; min-height: 400px; position: relative;
+  overflow: hidden;
+}
+[data-theme="dark"] .arch-canvas { background: #1e1e1f; border-color: #555; }
+.arch-node {
+  position: absolute; cursor: move;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  user-select: none;
+}
+.arch-node-box {
+  width: 64px; height: 64px; background: white;
+  border: 2px solid var(--azure-blue); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+[data-theme="dark"] .arch-node-box { background: #252526; }
+.arch-node-box:hover { box-shadow: var(--shadow-md); transform: scale(1.05); }
+.arch-node-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
+.arch-component-palette {
+  display: flex; gap: 8px; flex-wrap: wrap; padding: 12px;
+  background: white; border: 1px solid var(--card-border);
+  border-radius: 6px; margin-bottom: 12px;
+}
+[data-theme="dark"] .arch-component-palette { background: #252526; border-color: #3a3a3b; }
+.arch-component-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 10px; border: 1px solid var(--card-border);
+  border-radius: 4px; cursor: pointer; background: white; transition: var(--transition);
+  font-size: 10px; color: var(--text-secondary); font-family: var(--font);
+}
+[data-theme="dark"] .arch-component-btn { background: #2d2d2e; border-color: #555; color: #b0b0b0; }
+.arch-component-btn:hover { border-color: var(--azure-blue); color: var(--azure-blue); }
+.arch-component-btn span:first-child { font-size: 20px; }
+.arch-toolbar { display: flex; gap: 8px; margin-bottom: 10px; }
+
+/* ===================================================
+   7. PERSISTENCE / SAVED STATE INDICATOR
+   =================================================== */
+
+.save-indicator {
+  position: fixed; bottom: 70px; right: 20px;
+  background: #107c10; color: white;
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+  z-index: 999; opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.save-indicator.visible { opacity: 1; }
+
+/* ===================================================
+   8. ENHANCED DASHBOARD WIDGETS
+   =================================================== */
+
+.live-clock {
+  font-size: 12px; color: rgba(255,255,255,0.75);
+  font-family: monospace; letter-spacing: 0.5px;
+}
+
+.resource-health-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  display: inline-block; margin-right: 6px;
+  animation: blink 2s infinite;
+}
+.resource-health-dot.healthy { background: #107c10; }
+.resource-health-dot.degraded { background: #d83b01; }
+.resource-health-dot.down { background: #a4262c; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* Scrollable metric row */
+.metric-scroll-row {
+  display: flex; gap: 12px; overflow-x: auto;
+  padding-bottom: 8px; margin-bottom: 16px;
+}
+.metric-scroll-row::-webkit-scrollbar { height: 4px; }
+.metric-scroll-row .metric-card { min-width: 160px; flex-shrink: 0; }
+
+/* ===================================================
+   9. ONBOARDING TOOLTIP SYSTEM
+   =================================================== */
+
+.onboarding-highlight {
+  position: relative; z-index: 100;
+  box-shadow: 0 0 0 4px rgba(0,120,212,0.4);
+  border-radius: 4px;
+  animation: glow 1.5s ease-in-out infinite;
+}
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 0 4px rgba(0,120,212,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(0,120,212,0.2); }
+}
+
+.onboarding-tooltip {
+  position: fixed; z-index: 9998;
+  background: #0078D4; color: white;
+  padding: 12px 16px; border-radius: 8px;
+  max-width: 280px; font-size: 13px; line-height: 1.5;
+  box-shadow: var(--shadow-lg);
+}
+.onboarding-tooltip::before {
+  content: '';
+  position: absolute; bottom: -8px; left: 20px;
+  border: 8px solid transparent;
+  border-top-color: #0078D4;
+  border-bottom: none;
+}
+.onboarding-tooltip-actions { display: flex; gap: 8px; margin-top: 10px; }
+.onboarding-tooltip-actions button {
+  padding: 5px 12px; border-radius: 4px; border: none;
+  cursor: pointer; font-size: 12px; font-family: var(--font);
+}
+.onboarding-next { background: white; color: #0078D4; font-weight: 600; }
+.onboarding-skip { background: rgba(255,255,255,0.2); color: white; }
+
+/* ===================================================
+   10. BREADCRUMB ENHANCEMENTS
+   =================================================== */
+
+.page-breadcrumb a, .page-breadcrumb span { 
+  cursor: pointer; color: var(--azure-blue);
+}
+.page-breadcrumb a:hover, .page-breadcrumb span:hover { text-decoration: underline; }
+
+/* ===================================================
+   11. KEYBOARD SHORTCUT BADGE
+   =================================================== */
+
+.kbd {
+  display: inline-block; padding: 2px 6px;
+  background: var(--card-border); border-radius: 3px;
+  font-family: monospace; font-size: 11px;
+  color: var(--text-secondary); border: 1px solid #c8c6c4;
+  box-shadow: 0 1px 0 #c8c6c4;
+}
+
+/* ===================================================
+   12. RESPONSIVE ENHANCEMENTS (Mobile-first)
+   =================================================== */
+
+@media (max-width: 768px) {
+  .arm-panel, .activity-panel, .whatif-panel { width: 100%; }
+  .quiz-container { width: 100%; height: 100%; border-radius: 0; top: 0; left: 0; transform: none; max-height: 100vh; }
+  .quiz-results-breakdown { grid-template-columns: 1fr 1fr; }
+  .arm-resource-picker { grid-template-columns: 1fr; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .metric-scroll-row .metric-card { min-width: 140px; }
+}
+
+@media (max-width: 480px) {
+  .quiz-question-text { font-size: 14px; }
+  .quiz-results-breakdown { grid-template-columns: 1fr; }
+  .arch-component-palette { gap: 4px; }
+}
