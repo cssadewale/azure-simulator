@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Azure Learning Simulator — A free, interactive Microsoft Azure Portal replica for learning cloud computing. Built by Adewale Adeagbo." />
+  <meta name="author" content="Adewale Adeagbo" />
+  <meta name="keywords" content="Azure, Microsoft Azure, Cloud Computing, Learning, Simulator, Data Science, AZ-900, DP-100" />
+  <meta property="og:title" content="Azure Learning Simulator | Adewale Adeagbo" />
+  <meta property="og:description" content="A free, interactive Azure Portal replica for learning cloud computing from scratch." />
+  <meta property="og:type" content="website" />
+  <title>Azure Learning Simulator | Adewale Adeagbo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/sidebar.css" />
+  <link rel="stylesheet" href="styles/dashboard.css" />
+  <link rel="stylesheet" href="styles/services.css" />
+  <link rel="stylesheet" href="styles/modals.css" />
+  <link rel="stylesheet" href="styles/terminal.css" />
+  <link rel="stylesheet" href="styles/enhancements.css" />
+  <link rel="icon" href="assets/azure-icon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0078D4" />
+</head>
+<body>
+
+<!-- TOP NAVIGATION BAR -->
+<nav class="topbar" id="topbar">
+  <div class="topbar-left">
+    <button class="hamburger" id="hamburgerBtn" title="Toggle Sidebar">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="azure-logo" onclick="navigateTo('dashboard')">
+      <svg width="22" height="22" viewBox="0 0 96 96" fill="none">
+        <path d="M33.1 6L6 53.3l10.9 19L48 19.1 33.1 6z" fill="#0078D4"/>
+        <path d="M37.6 11.3L20.5 61.6l55.6 9.8L37.6 11.3z" fill="#0050D0"/>
+        <path d="M6 53.3L16.9 72.3l63.2 11.1-22-31L6 53.3z" fill="#0078D4"/>
+      </svg>
+      <span class="portal-title">Microsoft Azure</span>
+      <span class="simulator-badge">Simulator</span>
+    </div>
+    <div class="topbar-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <input type="text" id="globalSearch" placeholder="Search resources, services, and docs..." autocomplete="off" />
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <button class="topbar-btn" title="Cloud Shell" onclick="openTerminal()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+      </svg>
+    </button>
+    <button class="topbar-btn" title="Notifications" onclick="openNotifications()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+      <span class="notif-badge" id="notifBadge">3</span>
+    </button>
+    <button class="topbar-btn" title="Settings" onclick="openSettings()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+    <!-- Dark Mode Toggle -->
+    <button class="topbar-btn" id="darkModeBtn" title="Toggle Dark Mode" onclick="toggleDarkMode()">
+      <svg id="darkModeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <!-- Quiz Mode -->
+    <button class="topbar-btn" title="Exam Quiz Mode" onclick="openQuizMode()" style="position:relative">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+      <span style="position:absolute;top:3px;right:3px;width:6px;height:6px;background:#f7c41f;border-radius:50%"></span>
+    </button>
+    <!-- ARM Builder -->
+    <button class="topbar-btn" title="ARM Template Builder" onclick="openARMBuilder()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </button>
+    <!-- Activity Log -->
+    <button class="topbar-btn" title="Activity Log" onclick="openActivityLog()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+    </button>
+    <button class="topbar-btn help-btn" title="Help & Learning" onclick="openHelp()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </button>
+    <div class="user-avatar" onclick="openProfile()" title="Adewale Adeagbo">
+      <span>AA</span>
+    </div>
+  </div>
+</nav>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-inner">
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <a class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Home</span>
+        </a>
+        <a class="nav-item" data-page="dashboard" onclick="navigateTo('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Dashboard</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Favorites</div>
+        <a class="nav-item" data-page="resource-groups" onclick="navigateTo('resource-groups')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>Resource Groups</span>
+        </a>
+        <a class="nav-item" data-page="all-resources" onclick="navigateTo('all-resources')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>All Resources</span>
+        </a>
+        <a class="nav-item" data-page="subscriptions" onclick="navigateTo('subscriptions')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span>Subscriptions</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Compute</div>
+        <a class="nav-item" data-page="virtual-machines" onclick="navigateTo('virtual-machines')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Virtual Machines</span>
+        </a>
+        <a class="nav-item" data-page="app-service" onclick="navigateTo('app-service')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>App Service</span>
+        </a>
+        <a class="nav-item" data-page="functions" onclick="navigateTo('functions')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <span>Functions</span>
+        </a>
+        <a class="nav-item" data-page="container-instances" onclick="navigateTo('container-instances')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          <span>Container Instances</span>
+        </a>
+        <a class="nav-item" data-page="kubernetes" onclick="navigateTo('kubernetes')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="14.83" y1="9.17" x2="18.36" y2="5.64"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
+          <span>Kubernetes (AKS)</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Storage & Databases</div>
+        <a class="nav-item" data-page="storage-accounts" onclick="navigateTo('storage-accounts')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>Storage Accounts</span>
+        </a>
+        <a class="nav-item" data-page="sql-database" onclick="navigateTo('sql-database')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>SQL Database</span>
+        </a>
+        <a class="nav-item" data-page="cosmos-db" onclick="navigateTo('cosmos-db')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
+          <span>Cosmos DB</span>
+        </a>
+        <a class="nav-item" data-page="blob-storage" onclick="navigateTo('blob-storage')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>Blob Storage</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Data & Analytics</div>
+        <a class="nav-item" data-page="synapse" onclick="navigateTo('synapse')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>Synapse Analytics</span>
+        </a>
+        <a class="nav-item" data-page="databricks" onclick="navigateTo('databricks')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
+          <span>Azure Databricks</span>
+        </a>
+        <a class="nav-item" data-page="ml-studio" onclick="navigateTo('ml-studio')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+          <span>ML Studio</span>
+        </a>
+        <a class="nav-item" data-page="data-factory" onclick="navigateTo('data-factory')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>Data Factory</span>
+        </a>
+        <a class="nav-item" data-page="event-hubs" onclick="navigateTo('event-hubs')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Event Hubs</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Networking</div>
+        <a class="nav-item" data-page="virtual-network" onclick="navigateTo('virtual-network')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="6"/><rect x="9" y="16" width="6" height="6"/><rect x="2" y="9" width="6" height="6"/><rect x="16" y="9" width="6" height="6"/><line x1="9" y1="5" x2="5" y2="12"/><line x1="15" y1="5" x2="19" y2="12"/><line x1="5" y1="12" x2="9" y2="19"/><line x1="19" y1="12" x2="15" y2="19"/></svg>
+          <span>Virtual Network</span>
+        </a>
+        <a class="nav-item" data-page="load-balancer" onclick="navigateTo('load-balancer')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>Load Balancer</span>
+        </a>
+        <a class="nav-item" data-page="vpn-gateway" onclick="navigateTo('vpn-gateway')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>VPN Gateway</span>
+        </a>
+        <a class="nav-item" data-page="dns" onclick="navigateTo('dns')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>DNS Zones</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Security</div>
+        <a class="nav-item" data-page="key-vault" onclick="navigateTo('key-vault')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          <span>Key Vault</span>
+        </a>
+        <a class="nav-item" data-page="security-center" onclick="navigateTo('security-center')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Security Center</span>
+        </a>
+        <a class="nav-item" data-page="active-directory" onclick="navigateTo('active-directory')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Active Directory</span>
+        </a>
+        <a class="nav-item" data-page="firewall" onclick="navigateTo('firewall')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="16" y2="15"/></svg>
+          <span>Azure Firewall</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">DevOps</div>
+        <a class="nav-item" data-page="devops" onclick="navigateTo('devops')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+          <span>Azure DevOps</span>
+        </a>
+        <a class="nav-item" data-page="pipelines" onclick="navigateTo('pipelines')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Pipelines</span>
+        </a>
+        <a class="nav-item" data-page="repos" onclick="navigateTo('repos')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <span>Repos</span>
+        </a>
+        <a class="nav-item" data-page="container-registry" onclick="navigateTo('container-registry')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <span>Container Registry</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Integration</div>
+        <a class="nav-item" data-page="service-bus" onclick="navigateTo('service-bus')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          <span>Service Bus</span>
+        </a>
+        <a class="nav-item" data-page="api-management" onclick="navigateTo('api-management')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+          <span>API Management</span>
+        </a>
+        <a class="nav-item" data-page="stream-analytics" onclick="navigateTo('stream-analytics')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>Stream Analytics</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Tools</div>
+        <a class="nav-item" data-page="advisor" onclick="navigateTo('advisor')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Azure Advisor</span>
+        </a>
+        <a class="nav-item" data-page="architecture" onclick="navigateTo('architecture')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="6" height="6"/><rect x="15" y="3" width="6" height="6"/><rect x="9" y="15" width="6" height="6"/><line x1="6" y1="9" x2="6" y2="18"/><line x1="18" y1="9" x2="12" y2="15"/></svg>
+          <span>Architecture Diagrams</span>
+        </a>
+        <a class="nav-item" data-page="quiz" onclick="openQuizMode()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Exam Quiz</span>
+        </a>
+        <a class="nav-item" data-page="arm-builder" onclick="openARMBuilder()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>ARM Builder</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Monitor & Cost</div>
+        <a class="nav-item" data-page="monitor" onclick="navigateTo('monitor')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>Azure Monitor</span>
+        </a>
+        <a class="nav-item" data-page="cost-management" onclick="navigateTo('cost-management')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>Cost Management</span>
+        </a>
+        <a class="nav-item" data-page="log-analytics" onclick="navigateTo('log-analytics')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Log Analytics</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-footer-btn" onclick="openLearningPath()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span>Learning Path</span>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT AREA -->
+<main class="main-content" id="mainContent">
+  <!-- Pages are injected by JS -->
+</main>
+
+<!-- CLOUD SHELL TERMINAL -->
+<div class="terminal-panel" id="terminalPanel">
+  <div class="terminal-header">
+    <div class="terminal-tabs">
+      <button class="terminal-tab active" onclick="setShell('bash')">Bash</button>
+      <button class="terminal-tab" onclick="setShell('powershell')">PowerShell</button>
+    </div>
+    <div class="terminal-controls">
+      <span class="terminal-info">Azure Cloud Shell Simulator</span>
+      <button onclick="closeTerminal()" title="Close">✕</button>
+    </div>
+  </div>
+  <div class="terminal-body" id="terminalBody">
+    <div id="terminalOutput"></div>
+    <div class="terminal-input-row">
+      <span class="terminal-prompt" id="terminalPrompt">adewale@Azure:~$</span>
+      <input type="text" id="terminalInput" class="terminal-input" placeholder="Type a command..." autocomplete="off" />
+    </div>
+  </div>
+</div>
+
+<!-- MODALS CONTAINER -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal-container" id="modalContainer"></div>
+
+<!-- NOTIFICATION PANEL -->
+<div class="notification-panel" id="notificationPanel">
+  <div class="notif-header">
+    <h3>Notifications</h3>
+    <button onclick="closeNotifications()">✕</button>
+  </div>
+  <div class="notif-list" id="notifList"></div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- LEARNING PATH PANEL -->
+<div class="learning-panel" id="learningPanel">
+  <div class="learning-header">
+    <h3>📘 Learning Path</h3>
+    <button onclick="closeLearningPath()">✕</button>
+  </div>
+  <div class="learning-content" id="learningContent"></div>
+</div>
+
+<!-- QUIZ PANEL -->
+<div class="quiz-overlay" id="quizOverlay" style="display:none"></div>
+<div class="quiz-container" id="quizContainer" style="display:none"></div>
+
+<!-- ARM BUILDER PANEL -->
+<div class="arm-panel" id="armPanel">
+  <div class="arm-panel-header">
+    <div style="display:flex;align-items:center;gap:10px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <strong>ARM Template Builder</strong>
+    </div>
+    <button onclick="closeARMBuilder()" title="Close">✕</button>
+  </div>
+  <div class="arm-panel-body" id="armPanelBody"></div>
+</div>
+
+<!-- ACTIVITY LOG PANEL -->
+<div class="activity-panel" id="activityPanel">
+  <div class="notif-header">
+    <h3>📋 Activity Log</h3>
+    <button onclick="closeActivityLog()">✕</button>
+  </div>
+  <div id="activityList" style="overflow-y:auto;flex:1;padding:8px"></div>
+</div>
+
+<!-- WHAT-IF COST ESTIMATOR PANEL -->
+<div class="whatif-panel" id="whatifPanel">
+  <div class="notif-header">
+    <h3>💡 What-If Cost Estimator</h3>
+    <button onclick="closeWhatIf()">✕</button>
+  </div>
+  <div id="whatifBody" style="overflow-y:auto;flex:1;padding:16px"></div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="js/data.js"></script>
+<script src="js/state.js"></script>
+<script src="js/router.js"></script>
+<script src="js/terminal.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/search.js"></script>
+<script src="js/pages/dashboard.js"></script>
+<script src="js/pages/resource-groups.js"></script>
+<script src="js/pages/compute.js"></script>
+<script src="js/pages/storage.js"></script>
+<script src="js/pages/networking.js"></script>
+<script src="js/pages/security.js"></script>
+<script src="js/pages/data-analytics.js"></script>
+<script src="js/pages/devops.js"></script>
+<script src="js/pages/monitor.js"></script>
+<script src="js/pages/cost.js"></script>
+<script src="js/pages/all-resources.js"></script>
+<script src="js/pages/subscriptions.js"></script>
+<script src="js/pages/new-services.js"></script>
+<script src="js/learning.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/arm-builder.js"></script>
+<script src="js/activity-log.js"></script>
+<script src="js/dark-mode.js"></script>
+<script src="js/whatif.js"></script>
+<script src="js/persistence.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Register Service Worker for PWA/offline support
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('[SW] Registered:', reg.scope))
+        .catch(err => console.log('[SW] Registration failed:', err));
+    });
+  }
+</script>
+</body>
+</html>
